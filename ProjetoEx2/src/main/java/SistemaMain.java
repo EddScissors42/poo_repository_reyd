@@ -27,13 +27,20 @@ public class SistemaMain {
             switch (opcao) {
                 case 1:
                     System.out.println("\n-> Cadastrando novo item...");
+
                     System.out.println("Qual o nome do produto?"); //nome
                     String nomeSalvo = scanner.nextLine();
+
                     System.out.println("Insira o código de registro do produto");//codigo
                     String codigoSalvo = scanner.nextLine();
+
                     System.out.println("O produto é perecível?"); //perecivel
-                    String respostaPerecivel = scanner.nextLine();
-                    boolean perecivelSalvo = respostaPerecivel.equalsIgnoreCase("S"); //aprendi isso no guanabara hehe, eu acho?
+                    String respostaPerecivel = scanner.nextLine().toUpperCase();
+
+                    boolean perecivelSalvo = false;
+                    if (respostaPerecivel.startsWith("S")) { //qualquer coisa que começar com S, ele vai entender como S, até se a pessoa colocar SUCO
+                        perecivelSalvo = true;
+                    } //eu juro por Deus que é a ultima vez que eu faço essa gambiarra, eu mesmo não gosto (faço muitas)
                     System.out.println("Defina o valor do produto em R$:"); //valor
                     double valorSalvo = scanner.nextDouble();
 
@@ -41,28 +48,31 @@ public class SistemaMain {
 
 
                     Produto novoItem = new Produto(nomeSalvo, codigoSalvo, perecivelSalvo, valorSalvo);
-                    gerenciadorEstoque.adicionar(novoItem);
+                    try {
+                        gerenciadorEstoque.adicionar(novoItem);
+                        System.out.println("Produto cadastrado com sucesso!");
+                    } catch (ProdutoDuplicadoException e) {
+                        System.err.println(e.getMessage());
+                    } // eu tinha feito antes if e else para evitar essas coisas de duplicadas, agora decidi por exception
 
                     break;
                 case 2:
                     System.out.println("\n-> Listando itens cadastrados...");
-                    if (gerenciadorEstoque.estaVazio()){
+                    if (gerenciadorEstoque.estaVazio()) {
                         System.out.println("===-= ESTOQUE VAZIO! =-===");
                     }
 
 
                     // pretendo adicionar um if else aqui para determinar a questão do pericivel
 
-                    for (Produto item : gerenciadorEstoque.listarEstoque()){
-                        System.out.println("Nome do produto: " + item.getNome());
-                        System.out.println("Codigo: " + item.getCodigo());
-                        System.out.println("Preço: R$" + item.getValor());
-                        // colocar para mostrar se o item é pericivel ou não
+                    for (Produto item : gerenciadorEstoque.listarEstoque()) {
+                        System.out.println(item);
+                        // agora ele navega a lista e mostra tudo!
                     }
 
                     break;
                 case 3:
-                    System.out.println("\n-> Fechando o caixa. See Ya!");
+                    System.out.println("\n-> Apagando as luzes... See Ya!");
                     sistemaRodando = false; // ele vai esganar o sistema e assim encerrar
                     break;
                 default:
