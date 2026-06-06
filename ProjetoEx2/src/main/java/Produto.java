@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Produto { // o começo de tudo! decidi que iria fazer um mini gerenciador de produtos de supermercado
     private String nome;
     private String codigo;
@@ -39,4 +41,38 @@ public class Produto { // o começo de tudo! decidi que iria fazer um mini geren
         this.valor = valor;
     }
 
+    public String TextoPerecivel() {
+        if (perecivel) {
+            return "Sim";
+        } else {
+            return "Não";
+        }
+    }
+
+
+    @Override
+        public String toString() {
+            return "Produto [Nome=" + nome +
+                    ", Código=" + codigo +
+                    ", Perecível=" + TextoPerecivel() +
+                    ", Valor=R$" + valor + "]";
+    }
+
+    @Override // confesso que esse conceito ficou um pouco abstraido ate demais, confuso na minha cabeça, só sei q parece q fucniona
+    public boolean equals(Object obj){
+        if (this == obj){
+            return true;
+        }
+        if (!(obj instanceof Produto)){
+            return false;
+        }
+        Produto outroProduto = (Produto) obj; // ISSO AQUI JÁ É UM PRODUTO ENTÃO ELE SERA COMO TAL!!!!!
+
+        return Objects.equals(this.codigo, outroProduto.codigo); // iniciando a comparação vamos lá!
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigo);
+    }
 }
