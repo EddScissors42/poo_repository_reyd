@@ -4,9 +4,9 @@ import java.awt.event.*;
 
 public class GUI extends JFrame {
 
-    private JButton btnTeste;
     ImageIcon paisagem = new ImageIcon("C:\\Users\\reydn\\Documents\\GitHub\\poo_repository_reyd\\ProjetoEx7\\imgs\\paisagem.jpg");
     JLabel linha1, linha2;
+    JButton btnPesquisar, btnCatalogo, btnHistorico;
 
     public GUI(){
         setTitle("Atrativos Turisticos!");
@@ -25,15 +25,25 @@ public class GUI extends JFrame {
         getContentPane().add(linha1);
         getContentPane().add(linha2);
 
-        JPanel painelBotoes = new JPanel(new FlowLayout());
-
         // Adicionando Botões!
-        btnTeste = new JButton("Botão de teste");
-        btnTeste.setToolTipText("O que ele faz? Ele testa.");
+        btnPesquisar = new JButton("Pesquisar");
+        btnCatalogo = new JButton("Catalogo");
+        btnHistorico = new JButton("Historico");
 
-        // Gerenciamento de botões
-        painelBotoes.add(btnTeste);
-        add(painelBotoes, BorderLayout.SOUTH);
+        btnPesquisar.setToolTipText("Ele pesquisa");
+        btnCatalogo.setToolTipText("Ele mostra o catalogo");
+        btnHistorico.setToolTipText("Mostra teu historico de pesquisa");
+
+        getContentPane().setLayout(new GridLayout(3,2));
+        getContentPane().add(linha1);
+        getContentPane().add(btnPesquisar);
+        // Adicionar função do Pesquisar
+        getContentPane().add(linha2);
+        getContentPane().add(btnCatalogo);
+        // Adicionar função do Catálogo
+        getContentPane().add(new JLabel());
+        getContentPane().add(btnHistorico);
+        // Adicionar função do histórico
     }
 
     public static void main(String [] args){
