@@ -7,6 +7,7 @@ public class GUI extends JFrame {
     ImageIcon paisagem = new ImageIcon("C:\\Users\\reydn\\Documents\\GitHub\\poo_repository_reyd\\ProjetoEx7\\imgs\\paisagem.jpg");
     JLabel linha1, linha2;
     JButton btnPesquisar, btnCatalogo, btnHistorico;
+    JMenuBar barraDeMenu = new JMenuBar();
 
     public GUI(){
         setTitle("Atrativos Turisticos!");
@@ -30,20 +31,18 @@ public class GUI extends JFrame {
         btnCatalogo = new JButton("Catalogo");
         btnHistorico = new JButton("Historico");
 
+        JMenu menuPesquisa = new JMenu("Pesquisar");
+        JMenu menuCatalogo = new JMenu("Catalogo");
+        JMenu menuHistorico = new JMenu("Historico");
+        JMenu menuConfig = new JMenu("Configuração");
+
+
         btnPesquisar.setToolTipText("Ele pesquisa");
         btnCatalogo.setToolTipText("Ele mostra o catalogo");
         btnHistorico.setToolTipText("Mostra teu historico de pesquisa");
 
+        // ''Main'' do projeto
         getContentPane().setLayout(new GridLayout(3,2));
-        getContentPane().add(linha1);
-        getContentPane().add(btnPesquisar);
-        // Adicionar função do Pesquisar
-        getContentPane().add(linha2);
-        getContentPane().add(btnCatalogo);
-        // Adicionar função do Catálogo
-        getContentPane().add(new JLabel());
-        getContentPane().add(btnHistorico);
-        // Adicionar função do histórico
     }
 
     public static void main(String [] args){
